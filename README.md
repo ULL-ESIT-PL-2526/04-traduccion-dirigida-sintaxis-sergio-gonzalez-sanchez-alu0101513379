@@ -29,3 +29,8 @@ Type ".help" for more information.
 > p.parse("2*3")
 6
 ```
+
+# Desarrollo
+
+1. Se ha completado iniciado el proyecto con `npm i`, se ha producido el parser y se ha ejecutado la test suite
+2.
