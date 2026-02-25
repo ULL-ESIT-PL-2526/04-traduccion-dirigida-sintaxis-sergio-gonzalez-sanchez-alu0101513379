@@ -34,3 +34,9 @@ Type ".help" for more information.
 
 1. Se ha completado iniciado el proyecto con `npm i`, se ha producido el parser y se ha ejecutado la test suite
 2.
+2.1. La direfencia de devolver un token y skip whitespaces es que al leer un espacio en blanco queremos ignorar esos caracteres para producir la salida porque no necesitamos reglas para estos espacios en blanco.
+2.2. La salida seria 'NUMBER OP NUMBER OP INVALID'
+2.3. Indicamos antes ** porque si pusieramos primero los demás operadores, una entrada de ** casaria primero con el operador * que con el operador **.
+2.4. Se devuelve EOF unicamente cuando llegamos al final del input del parser.
+2.5. La reglas '.' es necesaria para tener un caso de accion ante entradas no contempladas en nuestro lenguaje, asi podemos devolver un error.
+3. 
