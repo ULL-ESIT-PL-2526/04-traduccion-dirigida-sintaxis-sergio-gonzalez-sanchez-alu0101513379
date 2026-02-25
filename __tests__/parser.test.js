@@ -10,6 +10,7 @@ describe('Parser Tests', () => {
       expect(parse("42")).toBe(42);
       expect(parse("0")).toBe(0);
       expect(parse("123")).toBe(123);
+      expect(parse("2.35e-3")).toBe(0.00235);
     });
   });
 
@@ -110,7 +111,6 @@ describe('Parser Tests', () => {
       expect(() => parse("3 +")).toThrow();
       expect(() => parse("+ 3")).toThrow();
       expect(() => parse("3 + + 4")).toThrow();
-      expect(() => parse("3.5")).toThrow(); // Only integers are supported
     });
 
     test('should handle incomplete expressions', () => {

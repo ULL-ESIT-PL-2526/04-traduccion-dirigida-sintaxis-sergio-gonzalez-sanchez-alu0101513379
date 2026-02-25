@@ -39,4 +39,6 @@ Type ".help" for more information.
 2.3. Indicamos antes ** porque si pusieramos primero los demás operadores, una entrada de ** casaria primero con el operador * que con el operador **.
 2.4. Se devuelve EOF unicamente cuando llegamos al final del input del parser.
 2.5. La reglas '.' es necesaria para tener un caso de accion ante entradas no contempladas en nuestro lenguaje, asi podemos devolver un error.
-3. 
+3. Se ha modificado grammar.jison añadiendo una regla que dice //.* { /* skip oneline comments */; }
+4. Se han añadido las reglas `[0-9]\.[0-9]+[eE][+-][0-9]+ {return 'NUMBER'; }` y `[0-9]+\.[0-9]+ { return 'NUMBER'; }`
+5. Hemos probado 2.35e+3 desde el grammar.jison
