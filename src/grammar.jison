@@ -2,9 +2,12 @@
 %lex
 %%
 \s+                   { /* skip whitespace */; }
-[0-9]+                { return 'NUMBER';       }
-"**"                  { return 'OP';           }
-[-+*/]                { return 'OP';           }
+[0-9]+(\.[0-9]+)?     { return 'NUMBER';       }
+"**"                  { return 'OPOW';         }
+[+\-]                 { return 'OPAD';         }
+[*/]                  { return 'OPMU';         }
+"("                   { return '(';            }
+")"                   { return ')';            }
 <<EOF>>               { return 'EOF';          }
 .                     { return 'INVALID';      }
 /lex
@@ -20,17 +23,37 @@ expressions
     ;
 
 expression
-    : expression OP term
-        { $$ = operate($OP, $expression, $term); }
+    : expression OPAD term
+        { $$ = operate($OPAD, $expression, $term); }
     | term
         { $$ = $term; }
     ;
 
 term
+    : term OPMU rexp
+        { $$ = operate($OPMU, $term, $rexp); }
+    | rexp
+        { $$ = $rexp; }
+    ;
+
+rexp
+    : factor OPOW rexp
+        { $$ = operate($OPOW, $factor, $rexp); }
+    | factor
+        { $$ = $factor; }
+    ;
+
+factor
     : NUMBER
-        { $$ = Number(yytext); }
+        { $$ = convert(yytext); }
+    | '(' expression ')'
+        { $$ = $expression; }
     ;
 %%
+
+function convert(str) {
+    return str.includes('.') ? parseFloat(str) : parseInt(str, 10);
+}
 
 function operate(op, left, right) {
     switch (op) {
