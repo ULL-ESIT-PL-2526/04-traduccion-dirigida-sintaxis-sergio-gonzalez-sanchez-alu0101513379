@@ -10,7 +10,6 @@ npm run build
 
 ## Ejecutar
 
-<<<<<<< HEAD
 1. Se ha completado iniciado el proyecto con `npm i`, se ha producido el parser y se ha ejecutado la test suite
 2.
 2.1. La direfencia de devolver un token y skip whitespaces es que al leer un espacio en blanco queremos ignorar esos caracteres para producir la salida porque no necesitamos reglas para estos espacios en blanco.
@@ -21,28 +20,6 @@ npm run build
 3. Se ha modificado grammar.jison añadiendo una regla que dice //.* { /* skip oneline comments */; }
 4. Se han añadido las reglas `[0-9]\.[0-9]+[eE][+-][0-9]+ {return 'NUMBER'; }` y `[0-9]+\.[0-9]+ { return 'NUMBER'; }`
 5. Hemos probado 2.35e+3 desde el grammar.jison
-=======
-```
-npm start
-node src/index.js "2 + 3 * 4"
-```
-
-## Tests
-
-```
-npm test
-```
-
----
-
-# Desarrollo (Práctica 4)
-
-1. Se inició el proyecto con `npm i`, se produjo el parser y se ejecutó la suite de tests.
-   - 2.1. Al leer espacios en blanco, se omiten sin producir token para no generar ruido en el análisis.
-   - 2.2. La salida sería `NUMBER OP NUMBER OP INVALID`.
-   - 2.3. `**` se declara antes que `[*/]` para que el lexer lo reconozca como un único token y no como dos `*`.
-   - 2.4. `EOF` se devuelve únicamente al alcanzar el final del input.
-   - 2.5. La regla `.` captura cualquier carácter no reconocido y devuelve `INVALID`, evitando fallos silenciosos.
 
 ---
 
@@ -60,4 +37,3 @@ npm test
 4. Se añadió la producción `F → ( E )` al grammar y los tokens `(` y `)` al lexer, permitiendo que cualquier expresión actúe como factor.
 
 5. Se añadieron tests de paréntesis en `parser.test.js`: cambio de precedencia, anulación de asociatividad derecha de `**`, anidamiento, flotantes y error ante paréntesis desbalanceados.
->>>>>>> doc
