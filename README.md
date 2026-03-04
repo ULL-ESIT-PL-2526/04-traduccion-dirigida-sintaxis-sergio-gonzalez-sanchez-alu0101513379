@@ -24,10 +24,14 @@ npm run build
 ---
 
 # Práctica 4.5
+1.
 
 1.1. Las tres frases (`4.0-2.0*3.0`, `2**3**2`, `7-4/2`) tienen la misma derivación izquierda: `L ⟹ E eof ⟹ E op T eof ⟹ E op T op T eof ⟹ T op T op T eof ⟹ number op number op number eof`.
+
 1.2. El árbol crece siempre a la izquierda por la recursión izquierda de `E → E op T`, agrupando `(4.0-2.0)*3.0`, `(2**3)**2` y `(7-4)/2`.
+
 1.3. Las acciones se evalúan bottom-up: primero los números hoja, luego los nodos internos de izquierda a derecha. Resultados: `6.0` (en vez de `-2.0`), `64` (en vez de `512`), `1.5` (en vez de `5`). La SDD no respeta la precedencia matemática porque todos los operadores comparten nivel en la gramática.
+
 1.4. Se añadieron tests de precedencia en `parser.test.js`; con la gramática original los 6 tests fallaban.
 
 2. Se reestructuró `src/grammar.jison` con tres niveles de no-terminales (`E`/`T`/`R`/`F`) y tres tokens (`opad`, `opmu`, `opow`). `+`/`-` son asociativos por la izquierda (menor precedencia), `*`/`/` también por la izquierda (precedencia media) y `**` es asociativo por la derecha mediante recursión derecha en `R → F opow R` (mayor precedencia).
