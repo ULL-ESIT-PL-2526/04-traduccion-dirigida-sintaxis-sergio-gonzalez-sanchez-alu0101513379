@@ -1,22 +1,16 @@
 /* Lexer */
 %lex
 %%
-\s+                   { /* skip whitespace */; }
-<<<<<<< HEAD
-"//.*"                { /* skip oneline comments */; }
-[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)? {return 'NUMBER';  }
-"**"                  { return 'OP';           }
-[-+*/]                { return 'OP';           }
-=======
-[0-9]+(\.[0-9]+)?     { return 'NUMBER';       }
-"**"                  { return 'OPOW';         }
-[+\-]                 { return 'OPAD';         }
-[*/]                  { return 'OPMU';         }
-"("                   { return '(';            }
-")"                   { return ')';            }
->>>>>>> doc
-<<EOF>>               { return 'EOF';          }
-.                     { return 'INVALID';      }
+\s+                                   { /* skip whitespace */; }
+\/\/.*                                { /* skip line comments */; }
+[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?  { return 'NUMBER';       }
+"**"                                  { return 'OPOW';         }
+[+\-]                                 { return 'OPAD';         }
+[*/]                                  { return 'OPMU';         }
+"("                                   { return '(';            }
+")"                                   { return ')';            }
+<<EOF>>                               { return 'EOF';          }
+.                                     { return 'INVALID';      }
 /lex
 
 /* Parser */
@@ -59,7 +53,7 @@ factor
 %%
 
 function convert(str) {
-    return str.includes('.') ? parseFloat(str) : parseInt(str, 10);
+    return str.includes('.') || /[eE]/.test(str) ? parseFloat(str) : parseInt(str, 10);
 }
 
 function operate(op, left, right) {
